@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { FaFacebookF, FaLinkedinIn, FaGoogle, FaEnvelope,FaLock } from 'react-icons/fa';
 
 
@@ -66,7 +67,9 @@ export default function Home() {
             <h2 className="text-3xl font-bold mb-2">Hello !</h2>
             <div className="border-2 w-10 border-white inline-block mb-2 "></div>
             <p className="mb-10">Fill up and start the journey!</p>
-            <a href="#" className=" px-12 py-2 inline-block border-2 border-white rounded-full font-semibold hover:bg-green-700 hover:border-gray-300 hover:shadow-2xl" >Sign Up</a>
+            <p className=" px-12 py-2 inline-block border-2 border-white rounded-full font-semibold hover:bg-green-700 hover:border-gray-300 hover:shadow-2xl" >
+            <Link href="/signup">Sign Up</Link>
+              </p>
           </div>
         </div>
       </main>
