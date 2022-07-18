@@ -14,19 +14,16 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await axios.post(url,
-        {
-        name,
-        email,
-        password,
-      },); 
-      console.log(res.data);
-    } catch (error) {
-      console.log(error.response);
-    }
+    
+     axios.post(url, { email, password }).then(function(res){
+      console.log("reponse is : " + res.message);
+     }).catch (function(error) {
+     console.log("error is " + error.message);
+    });
+    
 
   }
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
       <Head>

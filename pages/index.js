@@ -15,16 +15,13 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await axios.post(url,
-        {
-          email,
-          password,
-        });
-      console.log("reponse is : "+res.data);
-    } catch (error) {
-      console.log("error is "+error.response);
-    }
+    
+     axios.post(url, { email, password }).then(function(res){
+      console.log("reponse is : " + res.message);
+     }).catch (function(error) {
+     console.log("error is " + error.message);
+    });
+    
 
   }
   return (
@@ -77,10 +74,10 @@ export default function Home() {
                     <FaLock className="text-gray-400 m-2" />
                     <input type="password"
                       placeholder="Password"
+                      autoComplete="on"
                       className=" flex-1 outline-none bg-gray-100 text-sm"
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
-                    />
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}/>
                   </div>
                   <div className="flex justify-between w-64 mb-5">
                     <label className="flex items-center text-xs">
