@@ -1,9 +1,32 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { FaFacebookF, FaLinkedinIn, FaGoogle, FaEnvelope,FaLock } from 'react-icons/fa';
+import { FaFacebookF, FaLinkedinIn, FaGoogle, FaEnvelope, FaLock } from 'react-icons/fa';
+import { useState } from 'react';
+import axios from 'axios';
+const url = "https://test.mshr.website/api/login";
 
 
 export default function Home() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(url,
+        {
+          email,
+          password,
+        });
+      console.log("reponse is : "+res.data);
+    } catch (error) {
+      console.log("error is "+error.response);
+    }
+
+  }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
       <Head>
@@ -39,25 +62,39 @@ export default function Home() {
 
               <p className="text-gray-400 my-3"> or use your email account </p>
 
-              <div className="flex flex-col items-center ">
-                <div className="p-2 bg-gray-100 w-64 flex items-center mb-3">
-                  <FaEnvelope className="text-gray-400 m-2" />
-                  <input type="email" name="email" placeholder="Email" className=" flex-1 outline-none bg-gray-100 text-sm" />
-                </div>
-                <div className="p-2 bg-gray-100 w-64 flex items-center mb-3">
-                  <FaLock className="text-gray-400 m-2" />
-                  <input type="password" name="password" placeholder="Password" className=" flex-1 outline-none bg-gray-100 text-sm" />
-                </div>
-                <div className="flex justify-between w-64 mb-5">
-                  <label className="flex items-center text-xs">
-                    <input type="checkbox" name="remember" className="mr-1"/>Remember me   
-                  </label>
-                  <a href="#" className = "text-xs">Forgot Password?</a>
-                </div>
+              <form onSubmit={handleSubmit}>
+                <div className="flex flex-col items-center ">
+                  <div className="p-2 bg-gray-100 w-64 flex items-center mb-3">
+                    <FaEnvelope className="text-gray-400 m-2" />
+                    <input type="email"
+                      placeholder="Email"
+                      className=" flex-1 outline-none bg-gray-100 text-sm"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="p-2 bg-gray-100 w-64 flex items-center mb-3">
+                    <FaLock className="text-gray-400 m-2" />
+                    <input type="password"
+                      placeholder="Password"
+                      className=" flex-1 outline-none bg-gray-100 text-sm"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex justify-between w-64 mb-5">
+                    <label className="flex items-center text-xs">
+                      <input type="checkbox" name="remember" className="mr-1" />Remember me
+                    </label>
+                    <a href="#" className="text-xs">Forgot Password?</a>
+                  </div>
 
-                <a href="#" className=" px-12 py-2 inline-block bg-green-500 border-2 border-white rounded-full font-semibold hover:bg-green-700 hover:border-gray-300 hover:shadow-2xl" >Log In</a>
+                  <div className=" px-12 py-2 inline-block bg-green-500 border-2 border-white rounded-full font-semibold hover:bg-green-700 hover:border-gray-300 hover:shadow-2xl" >
+                    <button>Log In</button>
+                  </div>
 
-              </div>
+                </div>
+              </form>
             </div>
           </div>
 
@@ -68,8 +105,8 @@ export default function Home() {
             <div className="border-2 w-10 border-white inline-block mb-2 "></div>
             <p className="mb-10">Fill up and start the journey!</p>
             <p className=" px-12 py-2 inline-block border-2 border-white rounded-full font-semibold hover:bg-green-700 hover:border-gray-300 hover:shadow-2xl" >
-            <Link href="/signup">Sign Up</Link>
-              </p>
+              <Link href="/components/SignUpPage">Sign Up</Link>
+            </p>
           </div>
         </div>
       </main>
