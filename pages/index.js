@@ -13,15 +13,18 @@ export default function Home() {
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    
-     axios.post(url, { email, password }).then(function(res){
-      console.log("reponse is : " + res.message);
+    let responseData ;
+    e.preventDefault();
+  
+    await axios.post(url, { email, password }).then(function(res){
+      console.log("Login token is : " + res.data.token);
+      responseData = res.data;
      }).catch (function(error) {
-     console.log("error is " + error.message);
+     console.log("ERROR MESSAGE IS : " + error.response.data.message);
     });
     
+    // return responseData;
 
   }
   return (

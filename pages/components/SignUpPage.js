@@ -13,15 +13,13 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    
-     axios.post(url, { email, password }).then(function(res){
-      console.log("reponse is : " + res.message);
+ 
+     await axios.post(url, { name, email, password }).then(function(res){
+      console.log("Registration token is : " + res.data.token);
      }).catch (function(error) {
-     console.log("error is " + error.message);
+     console.log("ERROR MESSAGE IS :  " + error.response.data.message);
     });
-    
-
+  
   }
   
   return (
@@ -74,6 +72,7 @@ const SignUpPage = () => {
 
                     <input type="password"
                       placeholder="Password"
+                      autoComplete="on"
                       className=" flex-1 outline-none bg-gray-100 text-sm"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
